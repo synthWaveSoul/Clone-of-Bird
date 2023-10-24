@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class PipeSpawnScript : MonoBehaviour
 {
@@ -10,9 +11,13 @@ public class PipeSpawnScript : MonoBehaviour
 
     public float heightOffset;
 
+    public logicScript logic;
+
     // Start is called before the first frame update
     void Start()
     {
+        logic = GameObject.FindGameObjectWithTag("logic").GetComponent<logicScript>();
+
         spawnPipe();
     }
 
@@ -26,6 +31,11 @@ public class PipeSpawnScript : MonoBehaviour
             spawnPipe();
             timer = 0;
         }
+
+        if (logic.scoreText.text == "2"){
+            spawnRate = 1;
+        }
+        
     }
 
     void spawnPipe(){
